@@ -1,0 +1,56 @@
+CREATE TABLE judge (
+    judge_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE performer (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE scores (
+    score_id SERIAL PRIMARY KEY,
+    judge_id INTEGER REFERENCES judge(judge_id) ON DELETE CASCADE,
+    performer_id INTEGER REFERENCES performer(id) ON DELETE CASCADE,
+    presentation INTEGER NOT NULL CHECK (presentation BETWEEN 1 AND 5),
+    stage_presence INTEGER NOT NULL CHECK (stage_presence BETWEEN 1 AND 5),
+    choreography INTEGER NOT NULL CHECK (choreography BETWEEN 1 AND 5),
+    timing INTEGER NOT NULL CHECK (timing BETWEEN 1 AND 5),
+    performance INTEGER NOT NULL CHECK (performance BETWEEN 1 AND 5)
+);
+
+INSERT INTO judge (name, email, password)
+VALUES 
+    ('Judge 1', 'judge1@sjsu.edu', 'pass1'),
+    ('Judge 2', 'judge2@sjsu.edu', 'pass2'),
+    ('Judge 3', 'judge3@sjsu.edu', 'pass3');
+
+INSERT INTO performer (name)
+VALUES 
+    ('Kavya T'),
+    ('Yuti L'),
+    ('Aarya S'),
+    ('Parth Z'),
+    ('Dhruti Z');
+
+CREATE TABLE event_status (
+    event_id SERIAL PRIMARY KEY,
+    has_started BOOLEAN NOT NULL DEFAULT FALSE,
+    event_datetime TIMESTAMP NOT NULL
+);
+
+ALTER TABLE judge
+ADD COLUMN weight INTEGER DEFAULT 1;
+
+UPDATE judge
+SET weight = 2
+WHERE judge_id = 1;
+
+CREATE TABLE current_performer (
+    entry_id SERIAL PRIMARY KEY,
+    performer_id INTEGER REFERENCES performer(id) ON DELETE CASCADE,
+    entry_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
