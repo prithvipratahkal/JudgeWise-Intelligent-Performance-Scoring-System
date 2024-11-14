@@ -1,4 +1,4 @@
-# Score Board Application
+# JudgeWise - Intelligent Performance Scoring System
 
 The Score Board Application is a web-based platform designed to facilitate scoring and ranking in competitive events. It allows judges to submit scores for performers, provides an admin interface for event management, and offers a real-time view for bystanders to monitor the scoring progress.
 
