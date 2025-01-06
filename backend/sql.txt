@@ -29,7 +29,6 @@ VALUES
 
 INSERT INTO performer (name)
 VALUES 
-    ('Kavya T'),
     ('Yuti L'),
     ('Aarya S'),
     ('Parth Z'),
